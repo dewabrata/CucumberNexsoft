@@ -1,5 +1,7 @@
 package com.nexsoft.cucumber.definitions;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import com.nexsoft.cucumber.pom.HomePage;
 import com.nexsoft.cucumber.pom.SignInPage;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -43,21 +46,22 @@ public class LoginDefinition {
 	  System.out.println("User di Login Account");
   }
 
-  @When("^User memasukan username$")
-  public void inputUsername() throws Throwable {
-	  System.out.println("User memasukan username sebagai \\\"dewabrata@gmail.com\\");
-	  signIn.setEmail("dewabrata@gmail.com");
+  @When("^User memasukan username (.*)$")
+  public void inputUsername(String username){
+	
+	  System.out.println("User memasukan username sebagai " + username);
+	  signIn.setEmail(username);
   }
   
-  @And("User memasukan password")
-  public void inputPassword() throws Throwable {
-	  System.out.println("User memasukan password \\\"123456\\");
-	  signIn.setPassword("123456");
+  @And("^User memasukan password (.*)$")
+  public void inputPassword(String password)  {
+	  System.out.println("User memasukan password "  +password);
+	  signIn.setPassword(password);
   }
   
   
   @And("User memasukan password yang salah")
-  public void inputWrongPassword() throws Throwable {
+  public void inputWrongPassword(String password)  {
 	  System.out.println("User memasukan password \\\"123\\");
 	  signIn.setPassword("123");
   }
